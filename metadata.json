@@ -1,0 +1,6 @@
+{
+  "name": "Mind Laser (v0.0.0)",
+  "description": "Mind Laser (v0.0.0) processes real-time cognitive EEG telemetry and dynamically orchestrates Gemini Socratic guide behavior and agent topology states.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
