@@ -1,4 +1,4 @@
-export interface BrainwaveBands {
+eexport interface BrainwaveBands {
   epsilon: number;
   delta: number;
   theta: number;
@@ -55,7 +55,8 @@ export interface CalibrationProfile {
 }
 
 export const BandColors = {
-  epsilon: { bg: 'bg-slate-505', text: 'text-slate-400', border: 'border-slate-800', shadow: 'shadow-[0_0_8px_rgba(100,116,139,0.5)]', glow: 'rgba(100, 116, 139, 0.65)' },
+  // FIXED: Adjusted bg-slate-505 typo to standard tailwind token bg-slate-500
+  epsilon: { bg: 'bg-slate-500', text: 'text-slate-400', border: 'border-slate-800', shadow: 'shadow-[0_0_8px_rgba(100,116,139,0.5)]', glow: 'rgba(100, 116, 139, 0.65)' },
   delta: { bg: 'bg-red-600', text: 'text-red-400', border: 'border-red-900', shadow: 'shadow-[0_0_8px_rgba(220,38,38,0.5)]', glow: 'rgba(220, 38, 38, 0.65)' },
   theta: { bg: 'bg-orange-500', text: 'text-orange-400', border: 'border-orange-900', shadow: 'shadow-[0_0_8px_rgba(249,115,22,0.5)]', glow: 'rgba(249, 115, 22, 0.65)' },
   alpha: { bg: 'bg-emerald-500', text: 'text-emerald-500', border: 'border-emerald-900', shadow: 'shadow-[0_0_8px_rgba(16,185,129,0.5)]', glow: 'rgba(16, 185, 129, 0.65)' },
