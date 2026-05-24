@@ -1,0 +1,55 @@
+name: Deploy Mind Laser v3 Production Engine
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  audit_and_build:
+    name: Compile and Verify System Integrity
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Source Code
+        uses: actions/checkout@v4
+
+      - name: Initialize Node.js Environment
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'npm'
+
+      - name: Install System Dependencies
+        run: npm ci
+
+      - name: Run TypeScript Verification Compiler
+        run: npx tsc --noEmit
+
+      - name: Compile Production Build Artifacts
+        run: npm run build
+        env:
+          # Injects the backend target or fallback routing maps during compilation
+          VITE_APP_ENV: production
+
+  deploy_instance:
+    name: Execute Production Infrastructure Launch
+    needs: audit_and_build
+    if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Source Code
+        uses: actions/checkout@v4
+
+      # OPTION A: Deploying to Vercel via GitHub Actions
+      - name: Deploy to Vercel Cloud Runtime
+        uses: amondnet/vercel-action@v20
+        with:
+          vercel-token: ${{ secrets.VERCEL_TOKEN }}
+          vercel-org-id: ${{ secrets.VERCEL_ORG_ID }}
+          vercel-project-id: ${{ secrets.VERCEL_PROJECT_ID }}
+          vercel-args: '--prod'
